@@ -1,20 +1,20 @@
 import { TASK_DELETED, TASK_UPDATED } from './actionTypes'
 
-export function taskCompletedCreator(id) {
+export function taskCompleted(id) {
     return {
         type: TASK_UPDATED,
         payload: { id, completed: true }
     }
 }
 
-export function titleChangedCreator(id) {
+export function titleChanged(id) {
     return {
         type: TASK_UPDATED,
         payload: { id, title: `New title for ${id}` }
     }
 }
 
-export function taskRemovedCreator(id) {
+export function taskRemoved(id) {
     return {
         type: TASK_DELETED,
         payload: { id }
