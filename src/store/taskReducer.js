@@ -1,8 +1,8 @@
-import { taskDeleted, taskUpdated } from './actionTypes'
+import { TASK_DELETED, TASK_UPDATED } from './actionTypes'
 
-export function taskReducer(state, action) {
+export function taskReducer(state = [], action) {
     switch (action.type) {
-        case taskUpdated: {
+        case TASK_UPDATED: {
             const newArray = [...state]
             const elementIndex = newArray.findIndex(
                 element => element.id === action.payload.id
@@ -13,7 +13,7 @@ export function taskReducer(state, action) {
             }
             return newArray
         }
-        case taskDeleted: {
+        case TASK_DELETED: {
             const newArray = [...state].filter(
                 element => element.id !== action.payload.id
             )

@@ -1,2 +1,2 @@
-export const taskUpdated = 'task/updated'
-export const taskDeleted = 'task/deleted'
+export const TASK_UPDATED = 'task/updated'
+export const TASK_DELETED = 'task/deleted'
