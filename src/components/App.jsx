@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
-import store from '../store/store'
 import {
     taskCompleted,
     taskRemoved,
     titleChanged
 } from '../store/tasks/actionCreators'
+import configureStore from '../store/store'
+
+const store = configureStore()
 
 function App() {
     const [state, setState] = useState(store.getState())
