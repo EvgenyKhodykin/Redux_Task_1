@@ -1,6 +1,28 @@
-import { TASK_DELETED, TASK_UPDATED } from './actionTypes'
+const TASK_UPDATED = 'task/updated'
+const TASK_DELETED = 'task/deleted'
 
-export function taskReducer(state = [], action) {
+export function taskCompletedActionCreater(id) {
+    return {
+        type: TASK_UPDATED,
+        payload: { id, completed: true }
+    }
+}
+
+export function titleChangedActionCreater(id) {
+    return {
+        type: TASK_UPDATED,
+        payload: { id, title: `New title for ${id}` }
+    }
+}
+
+export function taskRemovedActionCreater(id) {
+    return {
+        type: TASK_DELETED,
+        payload: { id }
+    }
+}
+
+function reducer(state = [], action) {
     switch (action.type) {
         case TASK_UPDATED: {
             const newArray = [...state]
@@ -24,3 +46,5 @@ export function taskReducer(state = [], action) {
             return state
     }
 }
+
+export default reducer

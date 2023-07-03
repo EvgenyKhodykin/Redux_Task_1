@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import {
-    taskCompleted,
-    taskRemoved,
-    titleChanged
-} from '../store/tasks/actionCreators'
+    taskCompletedActionCreater,
+    taskRemovedActionCreater,
+    titleChangedActionCreater
+} from '../store/tasks'
 import configureStore from '../store/store'
 
 const store = configureStore()
@@ -18,15 +18,15 @@ function App() {
     }, [])
 
     const completeTask = taskId => {
-        store.dispatch(taskCompleted(taskId))
+        store.dispatch(taskCompletedActionCreater(taskId))
     }
 
     const changeTitle = taskId => {
-        store.dispatch(titleChanged(taskId))
+        store.dispatch(titleChangedActionCreater(taskId))
     }
 
     const removeTask = taskId => {
-        store.dispatch(taskRemoved(taskId))
+        store.dispatch(taskRemovedActionCreater(taskId))
     }
 
     return (
