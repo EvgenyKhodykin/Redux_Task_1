@@ -1,9 +1,11 @@
 import { legacy_createStore as createStore } from 'redux'
-import { taskReducer } from './taskReducer'
+import { taskReducer } from './tasks/reducer'
 
 const initialState = [
     { id: 1, title: 'Task 1', completed: false },
     { id: 2, title: 'Task 2', completed: false }
 ]
 
-export const store = createStore(taskReducer, initialState)
+const store = createStore(taskReducer, initialState)
+
+export default store
