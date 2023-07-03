@@ -6,6 +6,8 @@ const initialState = [
     { id: 2, title: 'Task 2', completed: false }
 ]
 
-const store = createStore(taskReducer, initialState)
+function configureStore() {
+    return createStore(taskReducer, initialState)
+}
 
-export default store
+export default configureStore
