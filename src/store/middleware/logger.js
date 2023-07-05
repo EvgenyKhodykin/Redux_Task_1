@@ -1,8 +1,6 @@
-export function logger(state) {
+export function logger() {
     return function wrapDispatch(next) {
         return function handleAction(action) {
-            console.log(state)
-
             return next(action)
         }
     }
