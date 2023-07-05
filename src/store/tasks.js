@@ -27,8 +27,8 @@ const tasksSlice = createSlice({
 const { actions, reducer: tasksReducer } = tasksSlice
 const { update, remove } = actions
 
-export function taskCompletedActionCreater(id) {
-    return update({ id, completed: true })
+export const completeTask = id => dispatch => {
+    dispatch(update({ id, completed: true }))
 }
 
 export function titleChangedActionCreater(id) {

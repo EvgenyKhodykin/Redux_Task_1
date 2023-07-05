@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
-    taskCompletedActionCreater,
+    completeTask,
     taskRemovedActionCreater,
     titleChangedActionCreater
 } from '../store/tasks'
@@ -16,10 +16,6 @@ function App() {
             setState(store.getState())
         })
     }, [])
-
-    const completeTask = taskId => {
-        store.dispatch(taskCompletedActionCreater(taskId))
-    }
 
     const changeTitle = taskId => {
         store.dispatch(titleChangedActionCreater(taskId))
@@ -44,7 +40,9 @@ function App() {
                             <p>{`Completed: ${element.completed}`}</p>
                             <button
                                 className='btn btn-primary'
-                                onClick={() => completeTask(element.id)}
+                                onClick={() =>
+                                    store.dispatch(completeTask(element.id))
+                                }
                             >
                                 Completed
                             </button>
