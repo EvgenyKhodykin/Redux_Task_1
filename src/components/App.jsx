@@ -8,6 +8,7 @@ import {
 import configureStore from '../store/store'
 
 const store = configureStore()
+console.log(import.meta.env.MODE)
 
 function App() {
     const [state, setState] = useState(store.getState())
