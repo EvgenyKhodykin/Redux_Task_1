@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
     completeTask,
+    getTasks,
     taskRemovedActionCreater,
     titleChangedActionCreater
 } from '../store/tasks'
@@ -12,6 +13,7 @@ function App() {
     const [state, setState] = useState(store.getState())
 
     useEffect(() => {
+        store.dispatch(getTasks())
         store.subscribe(() => {
             setState(store.getState())
         })
