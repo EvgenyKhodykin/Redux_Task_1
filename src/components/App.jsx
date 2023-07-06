@@ -8,7 +8,9 @@ import {
 } from '../store/tasks'
 
 function App() {
-    const state = useSelector(state => state)
+    const state = useSelector(state => state.entities)
+    const isLoading = useSelector(state => state.isLoading)
+    const error = useSelector(state => state.error)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -21,6 +23,12 @@ function App() {
 
     const removeTask = taskId => {
         dispatch(taskRemovedActionCreater(taskId))
+    }
+
+    if (isLoading) {
+        return <h1 className='mx-3 mt-3'>Loading...</h1>
+    } else if (error) {
+        return <p className='mx-3 mt-3'>{error}</p>
     }
 
     return (
