@@ -5,10 +5,9 @@ import {
     taskRemovedActionCreater,
     titleChangedActionCreater
 } from '../store/tasks'
-import configureStore from '../store/store'
+import createStore from '../store/createStore'
 
-const store = configureStore()
-console.log(import.meta.env.MODE)
+const store = createStore()
 
 function App() {
     const [state, setState] = useState(store.getState())
