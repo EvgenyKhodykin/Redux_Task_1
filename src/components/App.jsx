@@ -6,7 +6,8 @@ import {
     getTasks,
     loadTasks,
     taskRemovedActionCreater,
-    titleChangedActionCreater
+    titleChangedActionCreater,
+    addNewTask
 } from '../store/tasks'
 import { getErrors } from '../store/errors'
 
@@ -28,6 +29,11 @@ function App() {
         dispatch(taskRemovedActionCreater(taskId))
     }
 
+    const addTask = () => {
+        const title = prompt('Enter a title of a new task', 'new task')
+        dispatch(addNewTask(title))
+    }
+
     if (isLoading) {
         return <h1 className='mx-3 mt-3'>Loading...</h1>
     } else if (error.lenght > 0) {
@@ -36,16 +42,24 @@ function App() {
 
     return (
         <>
-            <h1 className='mx-3 mt-3'>Redux</h1>
-            <hr />
             <div className='container-fluid'>
-                <ul className='mt-5'>
+                <h1 className=''>Redux</h1>
+                <button
+                    className='btn btn-success'
+                    onClick={addTask}
+                >
+                    Add New Task
+                </button>
+            </div>
+            <hr />
+            <div className='container mx-0'>
+                <div className='row row-cols-3'>
                     {state.map(element => (
-                        <li
+                        <div
                             key={element.id}
-                            className='mb-5'
+                            className='col border mb-2 mx-2'
                         >
-                            <p>{element.title}</p>
+                            <p>Title: {element.title}</p>
                             <p>{`Completed: ${element.completed}`}</p>
                             <button
                                 className='btn btn-primary'
@@ -65,11 +79,11 @@ function App() {
                                 className='btn btn-danger'
                                 onClick={() => removeTask(element.id)}
                             >
-                                Delete Title
+                                Delete Task
                             </button>
-                        </li>
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         </>
     )

@@ -11,6 +11,10 @@ const todosService = {
             }
         })
         return data
+    },
+    addTodo: async payload => {
+        const { data } = await httpService.post(todosEndpoint, payload)
+        return data
     }
 }
 
