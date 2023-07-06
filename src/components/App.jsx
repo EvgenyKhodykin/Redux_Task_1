@@ -1,30 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     completeTask,
     getTasks,
     taskRemovedActionCreater,
     titleChangedActionCreater
 } from '../store/tasks'
-import createStore from '../store/createStore'
-
-const store = createStore()
 
 function App() {
-    const [state, setState] = useState(store.getState())
+    const state = useSelector(state => state)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        store.dispatch(getTasks())
-        store.subscribe(() => {
-            setState(store.getState())
-        })
-    }, [])
+        dispatch(getTasks())
+    }, [dispatch])
 
     const changeTitle = taskId => {
-        store.dispatch(titleChangedActionCreater(taskId))
+        dispatch(titleChangedActionCreater(taskId))
     }
 
     const removeTask = taskId => {
-        store.dispatch(taskRemovedActionCreater(taskId))
+        dispatch(taskRemovedActionCreater(taskId))
     }
 
     return (
@@ -43,7 +39,7 @@ function App() {
                             <button
                                 className='btn btn-primary'
                                 onClick={() =>
-                                    store.dispatch(completeTask(element.id))
+                                    dispatch(completeTask(element.id))
                                 }
                             >
                                 Completed
