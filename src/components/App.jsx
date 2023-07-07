@@ -17,6 +17,8 @@ function App() {
     const error = useSelector(getErrors())
     const dispatch = useDispatch()
 
+    console.log(state)
+
     useEffect(() => {
         dispatch(loadTasks())
     }, [dispatch])
