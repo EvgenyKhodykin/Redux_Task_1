@@ -12,7 +12,7 @@ const tasksSlice = createSlice({
             state.entities = action.payload
             state.isLoading = false
         },
-        update(state, action) {
+        updated(state, action) {
             const elementIndex = state.entities.findIndex(
                 element => element.id === action.payload.id
             )
@@ -21,7 +21,7 @@ const tasksSlice = createSlice({
                 ...action.payload
             }
         },
-        remove(state, action) {
+        removed(state, action) {
             state.entities = state.entities.filter(
                 element => element.id !== action.payload.id
             )
@@ -32,14 +32,14 @@ const tasksSlice = createSlice({
         taskRequestFailed(state) {
             state.isLoading = false
         },
-        add(state, action) {
+        added(state, action) {
             state.entities.push(action.payload)
         }
     }
 })
 
 const { actions, reducer: tasksReducer } = tasksSlice
-const { update, remove, received, taskRequested, taskRequestFailed, add } =
+const { updated, removed, received, taskRequested, taskRequestFailed, added } =
     actions
 
 export const loadTasks = () => async dispatch => {
@@ -54,15 +54,15 @@ export const loadTasks = () => async dispatch => {
 }
 
 export const completeTask = id => dispatch => {
-    dispatch(update({ id, completed: true }))
+    dispatch(updated({ id, completed: true }))
 }
 
 export function titleChangedActionCreater(id) {
-    return update({ id, title: `New title for ${id}` })
+    return updated({ id, title: `New title for ${id}` })
 }
 
 export function taskRemovedActionCreater(id) {
-    return remove({ id })
+    return removed({ id })
 }
 
 export const addNewTask = newTaskTitle => async dispatch => {
@@ -74,7 +74,7 @@ export const addNewTask = newTaskTitle => async dispatch => {
             completed: false
         }
         await todosService.addTodo(data)
-        dispatch(add(data))
+        dispatch(added(data))
     } catch (error) {
         dispatch(setError(error.message))
     }
