@@ -33,7 +33,13 @@ function App() {
 
     const addTask = () => {
         const title = prompt('Enter a title of a new task', 'new task')
-        dispatch(addNewTask(title))
+        const data = {
+            userId: 1,
+            id: Date.now(),
+            title: title,
+            completed: false
+        }
+        dispatch(addNewTask(data))
     }
 
     if (isLoading) {
@@ -65,9 +71,7 @@ function App() {
                             <p>{`Completed: ${element.completed}`}</p>
                             <button
                                 className='btn btn-primary'
-                                onClick={() =>
-                                    dispatch(completeTask(element.id))
-                                }
+                                onClick={() => dispatch(completeTask(element.id))}
                             >
                                 Completed
                             </button>

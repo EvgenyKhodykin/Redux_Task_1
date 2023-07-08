@@ -65,16 +65,10 @@ export function taskRemovedActionCreater(id) {
     return removed({ id })
 }
 
-export const addNewTask = newTaskTitle => async dispatch => {
+export const addNewTask = data => async dispatch => {
     try {
-        const data = {
-            userId: 1,
-            id: Date.now(),
-            title: newTaskTitle,
-            completed: false
-        }
-        await todosService.addTodo(data)
-        dispatch(added(data))
+        const payload = await todosService.addTodo(data)
+        dispatch(added(payload))
     } catch (error) {
         dispatch(setError(error.message))
     }
