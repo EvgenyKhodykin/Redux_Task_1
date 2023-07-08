@@ -8,11 +8,11 @@ const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        received(state, action) {
+        taskReceived(state, action) {
             state.entities = action.payload
             state.isLoading = false
         },
-        updated(state, action) {
+        taskUpdated(state, action) {
             const elementIndex = state.entities.findIndex(
                 element => element.id === action.payload.id
             )
@@ -21,7 +21,7 @@ const tasksSlice = createSlice({
                 ...action.payload
             }
         },
-        removed(state, action) {
+        taskRemoved(state, action) {
             state.entities = state.entities.filter(
                 element => element.id !== action.payload.id
             )
@@ -32,21 +32,27 @@ const tasksSlice = createSlice({
         taskRequestFailed(state) {
             state.isLoading = false
         },
-        added(state, action) {
+        taskAdded(state, action) {
             state.entities.push(action.payload)
         }
     }
 })
 
 const { actions, reducer: tasksReducer } = tasksSlice
-const { updated, removed, received, taskRequested, taskRequestFailed, added } =
-    actions
+const {
+    taskUpdated,
+    taskRemoved,
+    taskReceived,
+    taskRequested,
+    taskRequestFailed,
+    taskAdded
+} = actions
 
 export const loadTasks = () => async dispatch => {
     dispatch(taskRequested())
     try {
         const data = await todosService.fetch()
-        dispatch(received(data))
+        dispatch(taskReceived(data))
     } catch (error) {
         dispatch(taskRequestFailed())
         dispatch(setError(error.message))
@@ -54,21 +60,21 @@ export const loadTasks = () => async dispatch => {
 }
 
 export const completeTask = id => dispatch => {
-    dispatch(updated({ id, completed: true }))
+    dispatch(taskUpdated({ id, completed: true }))
 }
 
 export function titleChangedActionCreater(id) {
-    return updated({ id, title: `New title for ${id}` })
+    return taskUpdated({ id, title: `New title for ${id}` })
 }
 
 export function taskRemovedActionCreater(id) {
-    return removed({ id })
+    return taskRemoved({ id })
 }
 
 export const addNewTask = data => async dispatch => {
     try {
         const payload = await todosService.addTodo(data)
-        dispatch(added(payload))
+        dispatch(taskAdded(payload))
     } catch (error) {
         dispatch(setError(error.message))
     }
