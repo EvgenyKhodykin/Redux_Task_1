@@ -1,1 +1,0 @@
-console.log("kiss my ass, reviewer!")
